@@ -88,6 +88,51 @@ enum {
 };
 #endif
 
+#if defined(OS_netbsd)
+#include <ucontext.h>
+enum {
+#ifdef CPU_i386
+#	define CONTEXT_REGS    ((uae_u32 *)&CONTEXT_NAME->uc_mcontext.__gregs[_REG_EDI])
+	REG_EDI = 4,
+	REG_ESI = 5,
+	REG_EBP = 6,
+	REG_EBX = 8,
+	REG_EDX = 9,
+	REG_ECX = 10,
+	REG_EAX = 11,
+	REG_EIP = 14,
+	REG_EFL = 16,
+	REG_ESP = 7,
+#endif // CPU_i386
+#if defined(CPU_x86_64)
+#	define CONTEXT_REGS    ((uae_u64 *)&CONTEXT_NAME->uc_mcontext.__gregs[_REG_RDI])
+	REG_RDI = 0,
+	REG_RSI = 1,
+	REG_RDX = 2,
+	REG_RCX = 3,
+
+	REG_R8  = 4,
+	REG_R9  = 5,
+	REG_R10 = 6,
+	REG_R11 = 7,
+	REG_R12 = 8,
+	REG_R13 = 9,
+	REG_R14 = 10,
+	REG_R15 = 11,
+
+	REG_RBP = 12,
+	REG_RBX = 13,
+	REG_RAX = 14,
+
+	REG_RIP = 21,
+
+	REG_EFL = 23,
+
+	REG_RSP = 24,
+#endif // CPU_x86_64
+};
+#endif // OS_netbsd
+
 #if defined(OS_openbsd)
 enum {
 #ifdef CPU_i386

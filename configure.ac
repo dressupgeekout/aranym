@@ -1235,6 +1235,11 @@ for am in $ADDRESSING_TEST_ORDER; do
       DEFINES="$DEFINES -DFIXED_ADDRESSING -DFMEMORY=0x51000000"
       break
     fi
+    if test "$OS_TYPE" = "netbsd" && ( $HAVE_I386 || $HAVE_X86_64 ); then
+      ADDRESSING_MODE="fixed (0x51000000)"
+      DEFINES="$DEFINES -DFIXED_ADDRESSING -DFMEMORY=0x51000000"
+      break
+    fi
     if test "$OS_TYPE" = "openbsd" && ( $HAVE_I386 || $HAVE_X86_64 ); then
       ADDRESSING_MODE="fixed (0x51000000)"
       DEFINES="$DEFINES -DFIXED_ADDRESSING -DFMEMORY=0x51000000"
