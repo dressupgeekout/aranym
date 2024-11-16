@@ -4480,7 +4480,8 @@ void flush_icache_hard(void)
 
 #ifndef UAE
 	jit_log("JIT: Flush Icache_hard(%d/%x/%p), %u KB",
-		n,regs.pc,regs.pc_p,current_cache_size/1024);
+		/* XXX CHARLOTTE 'n' isn't a thing */
+		0,regs.pc,regs.pc_p,current_cache_size/1024);
 #endif
 	bi=active;
 	while(bi) {
